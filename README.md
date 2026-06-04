@@ -1,5 +1,7 @@
 # Knowledge Graph
 
+<img src="knowledge_graph.png" width="480" alt="Knowledge graph example" />
+
 Enter a URL and this app crawls it, sends the content to Claude, and renders an interactive force-directed graph of the site's semantic structure — topics, entities, features, and claims as nodes, with labeled edges showing how they relate.
 
 You can crawl a single page or a full site (up to 50 pages). In full-site mode, all pages are merged into one unified graph rather than shown separately. Firecrawl handles the crawling and returns clean markdown; Claude analyzes that markdown and decides the conceptual hierarchy — node size reflects how central a concept is, and color indicates its type. The graph is rendered with a physics simulation so related concepts naturally cluster together.
