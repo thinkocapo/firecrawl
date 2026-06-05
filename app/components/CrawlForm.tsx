@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 type Mode = "single" | "full";
 
 interface Props {
@@ -8,12 +10,14 @@ interface Props {
 }
 
 export default function CrawlForm({ onSubmit, disabled }: Props) {
+  const [url, setUrl] = useState("");
+  const [mode, setMode] = useState<Mode>("single");
+
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        const fd = new FormData(e.currentTarget);
-        onSubmit(fd.get("url") as string, fd.get("mode") as Mode);
+        onSubmit(url, mode);
       }}
       className="flex flex-col gap-4"
     >
@@ -22,6 +26,8 @@ export default function CrawlForm({ onSubmit, disabled }: Props) {
         type="url"
         required
         placeholder="https://example.com"
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
         disabled={disabled}
         className="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 text-white placeholder-zinc-500 focus:border-indigo-500 focus:outline-none disabled:opacity-50"
       />
@@ -30,13 +36,18 @@ export default function CrawlForm({ onSubmit, disabled }: Props) {
         {(["single", "full"] as Mode[]).map((m) => (
           <label
             key={m}
-            className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg border border-zinc-700 px-4 py-3 text-sm font-medium text-zinc-300 has-[:checked]:border-indigo-500 has-[:checked]:bg-indigo-950 has-[:checked]:text-white"
+            className={`flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg border px-4 py-3 text-sm font-medium transition-colors ${
+              mode === m
+                ? "border-indigo-500 bg-indigo-950 text-white"
+                : "border-zinc-700 text-zinc-300"
+            }`}
           >
             <input
               type="radio"
               name="mode"
               value={m}
-              defaultChecked={m === "single"}
+              checked={mode === m}
+              onChange={() => setMode(m)}
               disabled={disabled}
               className="sr-only"
             />

@@ -32,6 +32,7 @@ export default function Home() {
   const [status, setStatus] = useState<Status>("idle");
   const [graph, setGraph] = useState<GraphData | null>(null);
   const [error, setError] = useState<string>();
+  const [anthropicKey, setAnthropicKey] = useState("");
 
   async function handleSubmit(url: string, mode: "single" | "full") {
     setStatus("crawling");
@@ -52,7 +53,7 @@ export default function Home() {
       const analyzeRes = await fetch("/api/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ markdown: crawlData.markdown }),
+        body: JSON.stringify({ markdown: crawlData.markdown, anthropicKey: anthropicKey || undefined }),
       });
       const graphData = await analyzeRes.json();
       if (!analyzeRes.ok) throw new Error(graphData.error ?? "Analysis failed");
@@ -76,6 +77,8 @@ export default function Home() {
           <input
             type="password"
             placeholder="Anthropic key"
+            value={anthropicKey}
+            onChange={(e) => setAnthropicKey(e.target.value)}
             className="w-44 rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-1.5 text-xs text-white placeholder-zinc-500 focus:border-indigo-500 focus:outline-none"
           />
           <button
