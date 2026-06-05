@@ -9,18 +9,17 @@ function truncate(markdown: string): string {
 }
 
 export async function POST(req: NextRequest) {
-  const { markdown, anthropicKey } = await req.json();
+  const { markdown } = await req.json();
   if (!markdown) return NextResponse.json({ error: "markdown required" }, { status: 400 });
 
-  const apiKey = anthropicKey || process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
+  if (!process.env.ANTHROPIC_API_KEY) {
     return NextResponse.json(
-      { error: "No Anthropic API key found. Paste your key into the field at the top of the page." },
+      { error: "ANTHROPIC_API_KEY is not set. Add it to .env.local and restart the dev server." },
       { status: 500 },
     );
   }
 
-  const client = new Anthropic({ apiKey });
+  const client = new Anthropic();
   const content = truncate(markdown);
 
   const prompt = `You are analyzing web content to extract a semantic knowledge graph.
