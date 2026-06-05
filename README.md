@@ -1,6 +1,6 @@
 # Knowledge Graph
 
-<img src="knowledge_graph.png" width="100%" alt="Knowledge graph example" />
+<img src="knowledge_graph_test.png" width="100%" alt="Knowledge graph example" />
 
 Enter a URL and this app crawls it, sends the content to Claude, and renders an interactive force-directed graph of the site's semantic structure — topics, entities, features, and claims as nodes, with labeled edges showing how they relate.
 

@@ -70,7 +70,7 @@ export default function GraphView({ nodes, edges, dim = false }: Props) {
           ctx.stroke();
 
           // Draw label
-          const fontSize = Math.max(10, r * 0.9) / globalScale;
+          const fontSize = Math.max(16, r * 1.4) / globalScale;
           ctx.font = `${fontSize}px Inter, sans-serif`;
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
