@@ -67,9 +67,24 @@ export default function Home() {
 
   return (
     <div className="flex h-screen flex-col bg-zinc-950 text-white">
-      <header className="border-b border-zinc-800 px-6 py-4">
-        <h1 className="text-lg font-semibold tracking-tight">Knowledge Graph</h1>
-        <p className="text-xs text-zinc-500">Crawl a URL and visualize its semantic structure</p>
+      <header className="flex items-center justify-between border-b border-zinc-800 px-6 py-4">
+        <div>
+          <h1 className="text-lg font-semibold tracking-tight">Knowledge Graph</h1>
+          <p className="text-xs text-zinc-500">Crawl a URL and visualize its semantic structure</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <input
+            type="password"
+            placeholder="Anthropic key"
+            className="w-44 rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-1.5 text-xs text-white placeholder-zinc-500 focus:border-indigo-500 focus:outline-none"
+          />
+          <button
+            type="button"
+            className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-1.5 text-xs text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
+          >
+            Download as HTML
+          </button>
+        </div>
       </header>
 
       <div className="flex flex-1 overflow-hidden">
